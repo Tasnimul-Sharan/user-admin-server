@@ -11,7 +11,8 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-
+app.use(express.static("public"));
+app.set("view engine", "ejs");
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.oc8wxpz.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -112,8 +113,45 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("User Admin Website server");
+  res.render("home.ejs", {
+    id: "631c48080f745a70fc78032b",
+    user: {
+      name: "Tasnim Ahmed",
+      member: "Abdul Korim",
+      date: "2022-09-17",
+      time: "15:11",
+    },
+    id2: "631c48cb0f745a70fc78032d",
+    user2: {
+      name: "Mohona Alam",
+      member: "Omar Faruk",
+      date: "2022-09-14",
+      time: "16:20",
+    },
+    id3: "6631c4a050f745a70fc780330",
+    user3: {
+      name: "Ashraf Romon",
+      member: "Abdul Rahim",
+      date: "2022-09-22	",
+      time: "18:25",
+    },
+    id4: "631c49100f745a70fc78032e",
+    user4: {
+      name: "Asma Khanm",
+      member: "Abu Bokkor",
+      date: "2022-09-14",
+      time: "17:21",
+    },
+    id5: "631c49540f745a70fc78032f",
+    user5: {
+      name: "Shah Alam",
+      member: "Ahmed Kabir",
+      date: "2022-09-21",
+      time: "17:22",
+    },
+  });
 });
+
 app.listen(port, () => {
   console.log(`User Admin website is running on ${port}`);
 });
